@@ -1,7 +1,7 @@
 Package.describe({
   summary: "ICANN OAuth flow",
   version: "1.0.1",
-  name: "pathable:icann",
+  name: "pathable:icann-oauth",
   git: "https://github.com/pathable/icann",
 });
 
