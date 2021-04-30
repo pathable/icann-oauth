@@ -1,6 +1,6 @@
-Oidc = {};
+Icann = {};
 
-Oidc.requestCredential = (options, credentialRequestCompleteCallback) => {
+Icann.requestCredential = (options, credentialRequestCompleteCallback) => {
   if (!credentialRequestCompleteCallback && typeof options === 'function') {
     // eslint-disable-next-line no-param-reassign
     credentialRequestCompleteCallback = options;
@@ -15,7 +15,7 @@ Oidc.requestCredential = (options, credentialRequestCompleteCallback) => {
 
   const loginUrlParameters = {
     client_id: config.clientId,
-    redirect_uri: OAuth._redirectUri('oidc', config),
+    redirect_uri: OAuth._redirectUri('icann', config),
     // response_type: 'code',
     // scope: config.scopes,
     state: OAuth._stateParam(
@@ -39,7 +39,7 @@ Oidc.requestCredential = (options, credentialRequestCompleteCallback) => {
       .join('&');
 
   OAuth.launchLogin({
-    loginService: 'oidc',
+    loginService: 'icann',
     loginStyle,
     loginUrl,
     credentialRequestCompleteCallback,
