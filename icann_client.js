@@ -23,7 +23,7 @@ Icann.requestCredential = (options, credentialRequestCompleteCallback) => {
       credentialToken,
       options && options.redirectUrl
     ),
-    response_mode: 'fragment',
+    response_mode: 'form_post',
   };
 
   const loginUrl =
