@@ -42,7 +42,14 @@ OAuth.registerService('icann', 2, null, query => {
 
 const handleUserInfo = (idToken, accessToken, { userInfoUrl }) => {
   if (!userInfoUrl) {
+    if (!idToken) {
+      throw new Error(`Authorization failed. Token ID not present.`);
+    }
+
     return userDataFromToken(idToken);
+  }
+  if (!userInfoUrl) {
+    throw new Error(`Authorization failed. User Info URL not present.`);
   }
   try {
     const { data } = HTTP.get(userInfoUrl, {
@@ -57,6 +64,10 @@ const handleUserInfo = (idToken, accessToken, { userInfoUrl }) => {
       error,
       userInfoUrl,
     });
+    throw Object.assign(
+      new Error(`Authorization failed. Failed to fetch user data.`),
+      { response: error.response }
+    )
   }
 };
 
@@ -72,6 +83,7 @@ const userDataFromToken = idToken => {
         error,
         idToken,
       });
+      throw new Error(`Authorization failed. Failed to parse user data.`);
     }
   }
 };
