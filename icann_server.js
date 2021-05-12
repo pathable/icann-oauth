@@ -8,13 +8,17 @@ OAuth.registerService('icann', 2, null, query => {
 
   const { access_token: accessToken, id_token: idToken } = query;
 
+  const userInfo = handleUserInfo(idToken, accessToken, config);
+
+  console.log(`user info from icann`, userInfo);
+
   const {
     sub: id,
     email,
     given_name: firstName,
     family_name: lastName,
     name,
-  } = handleUserInfo(idToken, accessToken, config);
+  } = userInfo;
 
   const emailsFormatted = email ? [email] : [];
 
