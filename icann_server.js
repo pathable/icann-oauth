@@ -9,6 +9,7 @@ OAuth.registerService('icann', 2, null, query => {
   const { access_token: accessToken, id_token: idToken } = query;
 
   const userInfo = handleUserInfo(idToken, accessToken, config);
+  const userInfoAccessToken = userDataFromToken(accessToken);
 
   console.log(`user info from icann`, userInfo);
 
@@ -20,12 +21,17 @@ OAuth.registerService('icann', 2, null, query => {
     name,
   } = userInfo;
 
+  const {
+    given_name: firstNameAccessToken,
+    family_name: lastNameAccessToken,
+  } = userInfoAccessToken;
+
   const emailsFormatted = email ? [email] : [];
 
   const serviceData = {
     id,
-    firstName: firstName || name,
-    lastName,
+    firstName: firstNameAccessToken || firstName || name,
+    lastName: lastNameAccessToken || lastName,
     email,
     accessToken,
   };
