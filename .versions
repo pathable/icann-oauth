@@ -39,7 +39,7 @@ npm-mongo@3.9.0
 oauth@1.3.2
 oauth2@1.3.0
 ordered-dict@1.1.0
-pathable:icann-oauth@1.0.8
+pathable:icann-oauth@1.0.9
 promise@0.11.2
 random@1.2.0
 rate-limit@1.0.9

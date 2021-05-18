@@ -28,16 +28,20 @@ OAuth.registerService('icann', 2, null, query => {
 
   const emailsFormatted = email ? [email] : [];
 
-  const serviceData = {
-    id,
+  const _names = {
     firstName: firstNameAccessToken || firstName || name,
     lastName: lastNameAccessToken || lastName,
+  };
+
+  const serviceData = {
+    ..._names,
+    id,
     email,
     accessToken,
   };
 
   const options = {
-    profile: { firstName: firstName || name, lastName },
+    profile: { ..._names },
     tenantId: query.tenantId,
     email: email,
     emails: emailsFormatted,
