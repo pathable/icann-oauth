@@ -1,6 +1,8 @@
 Icann = {};
 
 Icann.requestCredential = (options, credentialRequestCompleteCallback) => {
+  import { getCookieScopeOrNull } from 'meteor/pathable-utilities/lib/scope/client-scope';
+
   if (!credentialRequestCompleteCallback && typeof options === 'function') {
     // eslint-disable-next-line no-param-reassign
     credentialRequestCompleteCallback = options;
@@ -10,8 +12,8 @@ Icann.requestCredential = (options, credentialRequestCompleteCallback) => {
 
   const config = options.config;
   const credentialToken = Random.secret();
-
   const loginStyle = 'redirect';
+  const { communityId } = getCookieScopeOrNull() || {};
 
   const loginUrlParameters = {
     client_id: config.clientId,
@@ -21,7 +23,8 @@ Icann.requestCredential = (options, credentialRequestCompleteCallback) => {
     state: OAuth._stateParam(
       loginStyle,
       credentialToken,
-      options && options.redirectUrl
+      options && options.redirectUrl,
+      { communityId }
     ),
     response_mode: 'form_post',
   };
