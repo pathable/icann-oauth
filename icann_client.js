@@ -10,7 +10,6 @@ Icann.requestCredential = (options, credentialRequestCompleteCallback) => {
 
   const config = options.config;
   const credentialToken = Random.secret();
-
   const loginStyle = 'redirect';
 
   const loginUrlParameters = {
@@ -21,7 +20,8 @@ Icann.requestCredential = (options, credentialRequestCompleteCallback) => {
     state: OAuth._stateParam(
       loginStyle,
       credentialToken,
-      options && options.redirectUrl
+      options && options.redirectUrl,
+      { communityId: config.communityId }
     ),
     response_mode: 'form_post',
   };
